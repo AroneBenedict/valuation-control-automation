@@ -7,6 +7,8 @@ Automating a valuation-control workflow: **clean > test > report > visualise**, 
 ![Dashboard preview](outputs/dashboard_preview.png)
 *Preview generated with Python (matplotlib) from the project outputs. It shows the intended layout of the Power BI page; it is not a Power BI screenshot.*
 
+![Power BI dashboard](powerbi/powerbi_overview.png)
+
 ## The problem
 A valuation control team compares each desk's mark with an independent price and investigates positions outside tolerance. Done manually this means repeated cleaning, copy-paste and reporting. This project automates the chain and re-performs the same rules in several tools so the results can be reconciled.
 
@@ -42,9 +44,7 @@ Full output files are in [`outputs/`](outputs/): `Exceptions.csv`, `Summary_by_A
 | Excel workbook formulas (`excel/`) | Recalculated, 0 formula errors; all 250 row-level statuses match the Python result |
 | Access SQL (`access/`) | Built in MS Access; `qry_ReconcileCounts` matches expected results (220 OK / 22 breaches / 6 no price / 2 unmapped) |
 | VBA macro (`vba/`) | Run in Excel; `Run_Log` matches expected results (254 raw / 250 unique / 4 duplicates / 6 no price / 2 unmapped / 5 stale / 22 breaches / 9.1%) |
-| Power BI (`powerbi/`) | DAX and build guide provided; `.pbix` **not yet built** |
-
-*(Update this table as you run each component.)*
+| Power BI (`powerbi/`) | Built in Power BI Desktop; measures match expected results (242 tested / 22 breaches / 9.1%) |
 
 ## Repository structure
 ```
