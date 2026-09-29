@@ -7,7 +7,7 @@ Automating a valuation-control workflow: **clean > test > report > visualise**, 
 ![Dashboard preview](outputs/dashboard_preview.png)
 *Preview generated with Python (matplotlib) from the project outputs. It shows the intended layout of the Power BI page; it is not a Power BI screenshot.*
 
-![Power BI dashboard](powerbi/powerbi_overview.png.png)
+![Power BI dashboard](powerbi/powerbi_overview.png)
 
 ## The problem
 A valuation control team compares each desk's mark with an independent price and investigates positions outside tolerance. Done manually this means repeated cleaning, copy-paste and reporting. This project automates the chain and re-performs the same rules in several tools so the results can be reconciled.
