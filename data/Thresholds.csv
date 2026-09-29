@@ -1,0 +1,5 @@
+AssetClass,TolerancePct
+Equity,0.01
+Corporate Bond,0.005
+Government Bond,0.0025
+FX Forward,0.003

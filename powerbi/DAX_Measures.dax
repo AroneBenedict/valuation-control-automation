@@ -1,0 +1,60 @@
+// ============================================================================
+// Power BI model - Position Price Verification (SYNTHETIC DATA)
+// Tables loaded from CSV (Get Data > Text/CSV):  Positions = Clean_Positions.csv | Thresholds = Thresholds.csv
+// Relationship: Positions[AssetClass] (many)  ->  Thresholds[AssetClass] (one), single direction.
+// Data types: ValuationDate = Date, Quantity/BookPrice/IndependentPrice/TolerancePct = Decimal number.
+// Create the CALCULATED COLUMNS on the Positions table, then the MEASURES (any table, e.g. a new "Measures" table).
+// ============================================================================
+
+// ------------------------- CALCULATED COLUMNS (table: Positions) -------------
+Variance % =
+DIVIDE ( Positions[BookPrice] - Positions[IndependentPrice], Positions[IndependentPrice] )
+
+Tolerance % =
+RELATED ( Thresholds[TolerancePct] )
+
+MV Diff =
+IF ( ISBLANK ( Positions[IndependentPrice] ), BLANK (), Positions[Quantity] * ( Positions[BookPrice] - Positions[IndependentPrice] ) )
+
+Status =
+SWITCH (
+    TRUE (),
+    ISBLANK ( Positions[Tolerance %] ), "UNMAPPED ASSET CLASS",
+    ISBLANK ( Positions[IndependentPrice] ), "NO INDEPENDENT PRICE",
+    ABS ( Positions[Variance %] ) > Positions[Tolerance %], "BREACH",
+    "OK"
+)
+
+// ------------------------- MEASURES ------------------------------------------
+Total Positions = COUNTROWS ( Positions )
+
+OK Count = CALCULATE ( COUNTROWS ( Positions ), Positions[Status] = "OK" )
+
+Breach Count = CALCULATE ( COUNTROWS ( Positions ), Positions[Status] = "BREACH" )
+
+Positions Tested = [OK Count] + [Breach Count]
+
+Breach Rate = DIVIDE ( [Breach Count], [Positions Tested] )
+
+No Price Count = CALCULATE ( COUNTROWS ( Positions ), Positions[Status] = "NO INDEPENDENT PRICE" )
+
+Unmapped Count = CALCULATE ( COUNTROWS ( Positions ), Positions[Status] = "UNMAPPED ASSET CLASS" )
+
+Net MV Diff (Tested) =
+CALCULATE ( SUM ( Positions[MV Diff] ), Positions[Status] IN { "OK", "BREACH" } )
+
+Net MV Diff (Breaches) =
+CALCULATE ( SUM ( Positions[MV Diff] ), Positions[Status] = "BREACH" )
+
+Abs MV Diff (Breaches) =
+CALCULATE ( SUMX ( Positions, ABS ( Positions[MV Diff] ) ), Positions[Status] = "BREACH" )
+
+// Report date used for the stale-date card (set the same date as the Excel Thresholds!E1)
+Report Date = DATE ( 2026, 9, 28 )
+
+Stale Date Count =
+CALCULATE ( COUNTROWS ( Positions ), Positions[ValuationDate] <> [Report Date] )
+
+// Card subtitle text
+Breach Headline =
+[Breach Count] & " breaches out of " & [Positions Tested] & " tested (" & FORMAT ( [Breach Rate], "0.0%" ) & ")"

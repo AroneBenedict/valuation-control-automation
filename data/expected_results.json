@@ -1,0 +1,70 @@
+{
+  "raw_rows": 254,
+  "unique": 250,
+  "duplicates": 4,
+  "no_price": 6,
+  "unmapped": 2,
+  "stale": 5,
+  "ok": 220,
+  "breach": 22,
+  "checked": 242,
+  "breach_rate": 0.0909,
+  "by_class": [
+    {
+      "AssetClass": "Corporate Bond",
+      "positions": 68,
+      "breaches": 4,
+      "net_mv": -36124.33
+    },
+    {
+      "AssetClass": "Equity",
+      "positions": 78,
+      "breaches": 11,
+      "net_mv": -253878.63
+    },
+    {
+      "AssetClass": "FX Forward",
+      "positions": 40,
+      "breaches": 4,
+      "net_mv": 49762.48
+    },
+    {
+      "AssetClass": "Government Bond",
+      "positions": 56,
+      "breaches": 3,
+      "net_mv": 6558.12
+    }
+  ],
+  "top5": [
+    {
+      "PositionID": "P0068",
+      "AssetClass": "Equity",
+      "VariancePct": 0.01585,
+      "MVDiff": 78887.52
+    },
+    {
+      "PositionID": "P0074",
+      "AssetClass": "Equity",
+      "VariancePct": 0.017843,
+      "MVDiff": 43356.6
+    },
+    {
+      "PositionID": "P0055",
+      "AssetClass": "Equity",
+      "VariancePct": -0.01045,
+      "MVDiff": -35472.36
+    },
+    {
+      "PositionID": "P0106",
+      "AssetClass": "Equity",
+      "VariancePct": -0.0268,
+      "MVDiff": -26643.33
+    },
+    {
+      "PositionID": "P0091",
+      "AssetClass": "Corporate Bond",
+      "VariancePct": 0.014854,
+      "MVDiff": 25110.57
+    }
+  ]
+}

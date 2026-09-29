@@ -1,0 +1,7 @@
+Check,Count
+Raw rows loaded,254
+Duplicate rows removed,4
+Unique positions,250
+Missing independent price,6
+Unmapped asset class,2
+Stale valuation date,5

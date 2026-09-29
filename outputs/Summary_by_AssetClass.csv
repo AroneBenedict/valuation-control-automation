@@ -1,0 +1,5 @@
+AssetClass,PositionsTested,OK,Breaches,NoIndepPrice,BreachRate,NetMVDiff
+Corporate Bond,68,64,4,2,0.0588,-36124.33
+Equity,78,67,11,2,0.141,-253878.63
+FX Forward,40,36,4,0,0.1,49762.48
+Government Bond,56,53,3,2,0.0536,6558.12
