@@ -40,8 +40,8 @@ Full output files are in [`outputs/`](outputs/): `Exceptions.csv`, `Summary_by_A
 |---|---|
 | Python reference implementation (`python/run_controls.py`) | Run; outputs in `outputs/`; asserts equality with `data/expected_results.json` |
 | Excel workbook formulas (`excel/`) | Recalculated, 0 formula errors; all 250 row-level statuses match the Python result |
-| Access SQL (`access/`) | Query logic tested in SQLite (same counts and top exceptions); not yet run in MS Access |
-| VBA macro (`vba/`) | Written; **not yet executed in Excel** |
+| Access SQL (`access/`) | Built in MS Access; `qry_ReconcileCounts` matches expected results (220 OK / 22 breaches / 6 no price / 2 unmapped) |
+| VBA macro (`vba/`) | Run in Excel; `Run_Log` matches expected results (254 raw / 250 unique / 4 duplicates / 6 no price / 2 unmapped / 5 stale / 22 breaches / 9.1%) |
 | Power BI (`powerbi/`) | DAX and build guide provided; `.pbix` **not yet built** |
 
 *(Update this table as you run each component.)*
